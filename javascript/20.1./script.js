@@ -6,4 +6,8 @@ const favPlayer = prompt(
 
 let result = favPlayer;
 
+if (isNaN(favPlayer)) {
+  result = "Enter a number";
+} else result;
+
 console.log(result);

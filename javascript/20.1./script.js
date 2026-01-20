@@ -6,8 +6,10 @@ const favPlayer = prompt(
 
 let result = favPlayer;
 
-if (isNaN(favPlayer)) {
+if (isNaN(result)) {
   result = "Enter a number";
+} else if (favPlayer === null || favPlayer === "") {
+  result = "You forgot to type a number bruh";
 } else result;
 
 console.log(result);

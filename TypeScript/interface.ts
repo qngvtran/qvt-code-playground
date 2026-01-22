@@ -57,4 +57,53 @@ const jersey4: playerShirt = {
 console.log(jersey3, jersey4);
 
 // Added "extension" and trying multiple
-// Next => Nested Interfaces and Methods
+// Next => Nested Interfaces, Methods and Dynamic Keys
+
+// Nested Interface
+interface Coach {
+  name: string;
+  surname: string;
+}
+
+interface Address {
+  country: string;
+  city: string;
+}
+
+interface Club {
+  name: string;
+  stadium: Address;
+  headCoach: Coach;
+  players: string[];
+}
+
+const players: string[] = ["Cunha", "Bruno"];
+
+const manUnited: Club = {
+  name: "Manchester United F.C.",
+  stadium: {
+    country: "UK",
+    city: "Manchester",
+  },
+  headCoach: {
+    name: "Michael",
+    surname: "Carrick",
+  },
+  players,
+};
+
+console.log(manUnited);
+
+// Keys
+interface Leaderboard {
+  [playerName: string]: number | string;
+}
+
+const topScorers: Leaderboard = {
+  Ronaldo: 62,
+  Messi: 59,
+  Suarez: 56,
+  Neymar: "Injured",
+};
+
+console.log(topScorers);

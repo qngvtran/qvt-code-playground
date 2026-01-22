@@ -14,6 +14,7 @@ if (favPlayer === null || favPlayer.trim() === "") {
   result = "You forgot to type a number bruh";
 } else {
   const playerNumber = Number(favPlayer);
+
   if (isNaN(playerNumber)) {
     result = "Enter a valid number";
   } else if (playerNumber === 7) {

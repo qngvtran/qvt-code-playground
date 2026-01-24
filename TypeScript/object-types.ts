@@ -1,3 +1,5 @@
+// Object types
+
 interface playerJersey {
   name: string;
   jerseyNumber: number;
@@ -93,6 +95,8 @@ const manUnited: Club = {
 };
 
 console.log(manUnited);
+console.log(manUnited.headCoach.name);
+console.log(manUnited.headCoach.surname);
 
 // Keys
 interface Leaderboard {
@@ -107,3 +111,79 @@ const topScorers: Leaderboard = {
 };
 
 console.log(topScorers);
+
+// Practice 24th Jan 26
+
+type Player = {
+  name: string;
+  age: number;
+};
+
+let person: Player = { name: "Ronaldo", age: 40 };
+
+// Interface is similar to Type, but interface can be extended amd implemented in classes.
+// Interfaces are preferred.
+
+// "readonly" value cannot be changed
+
+interface Calculator {
+  result(a: number, b: number): number;
+}
+
+let myCalc: Calculator = {
+  // result: (a, b) => a + b,
+  // result: (a, b) => a - b,
+  // result: (a, b) => a * b,
+  result: (a, b) => a / b,
+};
+console.log(myCalc.result(10, 5));
+
+// Combining types
+
+type A = { x: number };
+type B = { y: number };
+
+type AB = A & B;
+
+let point: AB = { x: 10, y: 20 };
+
+console.log(point);
+
+// Record<K, V>
+// K = keys
+// V = values
+// Defines object type where keys map to values
+
+type PlayerRating = Record<string, number | string>;
+let rating: PlayerRating = {
+  Ronaldo: "PERFECT RATING",
+  Messi: 9.7,
+};
+
+console.log(rating.Ronaldo);
+console.log(rating.Messi);
+
+// Omit - removes a property (K) from type (T) while keeping the rest of the properties
+
+type FootballPlayer = {
+  name: string;
+  age: number;
+  jerseyNumber: number;
+};
+
+type FootballClub = {
+  club: string;
+  country: string;
+};
+
+type PlayerID = Omit<FootballPlayer, "age"> & FootballClub;
+
+let player: PlayerID = {
+  name: "Ronaldo",
+  jerseyNumber: 7,
+  club: "All Nassr",
+  country: "Saudi Arabia",
+};
+
+console.log(player);
+console.log(player.club);

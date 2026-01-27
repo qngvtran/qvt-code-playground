@@ -50,5 +50,5 @@ enum Color {
   Blue,
 }
 
-console.log(Color.Green);
-console.log(Color[7]);
+console.log(Color.Green); // Output is gonna be 6, because Red is 5
+console.log(Color[7]); // Output Blue

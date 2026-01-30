@@ -1,9 +1,8 @@
 const fastify = require("fastify")({ logger: true });
-
 const PORT = 3000;
 
 fastify.get("/", async (request, reply) => {
-  return { hello: "world" };
+  return "Learning Fastify framework";
 });
 
 const start = async () => {

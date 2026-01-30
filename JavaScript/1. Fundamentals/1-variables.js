@@ -1,11 +1,11 @@
 // Variables
 
-const name = "Cristiano";
+const userName = "Cristiano";
 
 let surname;
 
-surname = "Ronaldo";
+surname = "Ronaldo dos Santos Aveiro";
 
-var fullName = `The best player in the world ${name} ${surname}`;
+var fullName = `The best player in the world ${userName} ${surname}`;
 
 console.log(fullName);

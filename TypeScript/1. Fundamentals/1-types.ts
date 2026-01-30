@@ -78,3 +78,59 @@ let coach: Manager = {
 };
 
 console.log(coach);
+
+interface JerseyNumber {
+  number: number;
+}
+interface Jersey extends JerseyNumber {
+  player: string;
+  club: string;
+}
+
+let ronaldoShirt: Jersey = { player: "Ronaldo", club: "All Nassr", number: 7 };
+
+console.log(ronaldoShirt.player);
+
+type A = { a: number };
+type B = { b: number };
+
+type AB = A & B;
+
+let point: AB = { a: 10, b: 20 };
+
+//Record<K, V> utility type defines an object type where keys (K) map to values (V)
+
+type GoalScorers = Record<string, number>;
+
+let scoreboard: GoalScorers = {
+  Ronaldo: 62,
+  Messi: 58,
+  Neymar: 39,
+};
+
+console.log(scoreboard);
+
+// Omit removes a property K from type T while keeping the rest of the properties
+// In the example below the isProfessional property is removed from FootballPlayer before merging
+
+type FootbalPlayer = {
+  name: string;
+  age: number;
+  isProfessional: boolean;
+};
+
+type FootballClub = {
+  name?: string;
+  country: string;
+};
+
+type PlayerWithoutContract = Omit<FootbalPlayer, "isProfessional"> &
+  FootballClub;
+
+let amateur: PlayerWithoutContract = {
+  name: "Quang",
+  age: 21,
+  country: "Czechia",
+};
+
+console.log(amateur);

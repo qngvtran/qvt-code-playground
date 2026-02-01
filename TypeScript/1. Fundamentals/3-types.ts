@@ -59,3 +59,38 @@ function throwError(message: string): never {
 type GreetFunction = (name: string) => string;
 const sayHello: GreetFunction = (name) => `Hello, ${name}!`;
 console.log(sayHello("Cristiano"));
+
+let value: any;
+
+value = 10;
+value = "Hello";
+value = true;
+
+let userInput: any;
+userInput = 5;
+userInput.toUpperCase(); // No error in TypeScript, but will fail at runtime
+
+let data: unknown;
+data = "TypeScript";
+
+if (typeof data === "string") {
+  console.log(data.toUpperCase()); // Safe operation
+}
+
+// data.toUpperCase(); // Error: Property 'toUpperCase' does not exist on type 'unknown'
+
+function textMessage(message: string): void {
+  console.log(message);
+}
+
+textMessage("Hello!");
+
+function giveError(message: string): never {
+  throw new Error(message);
+}
+
+function infiniteLoop(): never {
+  while (true) {
+    console.log("Running forever...");
+  }
+}

@@ -60,6 +60,8 @@ type GreetFunction = (name: string) => string;
 const sayHello: GreetFunction = (name) => `Hello, ${name}!`;
 console.log(sayHello("Cristiano"));
 
+// Any, Unknown, Void, Undefined, Never types
+
 let value: any;
 
 value = 10;
@@ -74,7 +76,7 @@ let data: unknown;
 data = "TypeScript";
 
 if (typeof data === "string") {
-  console.log(data.toUpperCase()); // Safe operation
+  console.log(data.toUpperCase());
 }
 
 // data.toUpperCase(); // Error: Property 'toUpperCase' does not exist on type 'unknown'
@@ -94,3 +96,76 @@ function infiniteLoop(): never {
     console.log("Running forever...");
   }
 }
+
+// Type assertions
+
+let someValue: unknown = "Hello, TypeScript!";
+
+// Method 1: Using 'as' syntax (Recommended)
+let strLength: number = (someValue as string).length;
+
+// Method 2: Using angle-bracket syntax
+let strLength2: number = (<string>someValue).length;
+
+function getUserInput(): unknown {
+  return "Hello World";
+}
+
+let input = getUserInput();
+
+// console.log(input.toUpperCase()); // TypeScript Error => Property 'toUpperCase' does not exist on type 'unknown'.
+
+console.log((input as string).toUpperCase()); // Works fine
+
+let inputElement = document.getElementById("username") as HTMLInputElement;
+
+inputElement.value = "TypeScript is awesome!";
+
+let myCanvas = document.getElementById("canvas")!;
+
+function getFormattedValue(value: string | number) {
+  if ((value as string).toUpperCase) {
+    return (value as string).toUpperCase();
+  }
+  return value;
+}
+
+console.log(getFormattedValue("hello"));
+console.log(getFormattedValue(42));
+
+// let num1 = "123" as number; // TypeScript Error => Can't convert string to number
+let num: number = Number("123");
+
+let value: unknown = "Hello";
+console.log(value as any as number); // No error, but incorrect!
+
+const user1 = {
+  name: "Alice",
+  age: 30,
+} satisfies User;
+
+const user2 = {
+  name: "Alice",
+  age: 30,
+} as const satisfies User;
+
+type TypeOfObject = {
+  firstName: string;
+  lastName: string;
+};
+
+const myObject: TypeOfObject = {
+  firstName: "John",
+  lastName: "Doe",
+};
+
+Object.keys(myObject).map((item) => {
+  // Gives error: "Element implicitly has an 'any' type because expression of ..."
+  // myObject[item];
+
+  // When the type of the object is known
+  myObject[item as keyof TypeOfObject];
+
+  // When the type of the object is not known
+  myObject[item as keyof typeof myObject];
+});

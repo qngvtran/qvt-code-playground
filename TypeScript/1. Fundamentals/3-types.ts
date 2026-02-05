@@ -169,3 +169,64 @@ Object.keys(myObject).map((item) => {
   // When the type of the object is not known
   myObject[item as keyof typeof myObject];
 });
+
+// Literal types
+
+let showStatus: "success" | "error" | "pending";
+
+showStatus = "success"; // Valid
+showStatus = "error"; // Valid
+// showStatus = "failed"; // Error: Type '"failed"' is not assignable to type '"success" | "error" | "pending"'.
+
+let diceRoll: 1 | 2 | 3 | 4 | 5 | 6;
+
+diceRoll = 3; // Valid
+// diceRoll = 7; // Error: Type '7' is not assignable to type '1 | 2 | 3 | 4 | 5 | 6'.
+
+let isEnabled: true | false;
+
+isEnabled = true; // Valid
+isEnabled = false; // Valid
+// isEnabled = "yes"; // Error: Type '"yes"' is not assignable to type 'true | false'.
+
+function setStatus(status: "success" | "error" | "pending") {
+  console.log(`Status set to: ${status}`);
+}
+
+setStatus("success"); // Works
+setStatus("error"); // Works
+// setStatus("failed"); // Error: Argument of type '"failed"' is not assignable to parameter type.
+
+type Status = "success" | "error" | "pending";
+
+let apiStatus: Status;
+apiStatus = "success"; // Valid
+// apiStatus = "failed"; // Error
+
+type Shape =
+  | { kind: "circle"; radius: number }
+  | { kind: "square"; side: number };
+
+function getArea(shape: Shape): number {
+  if (shape.kind === "circle") {
+    return Math.PI * shape.radius * shape.radius;
+  } else {
+    return shape.side * shape.side;
+  }
+}
+
+console.log(getArea({ kind: "circle", radius: 10 })); // Works
+// console.log(getArea({ kind: "triangle", base: 5, height: 10 })); // Error
+
+const color = "red"; // Type is "red" (literal)
+
+// let color = "red"; // Type is string, not "red"
+
+// const color = "red" as const; // Now color is strictly "red"
+
+const config = {
+  theme: "dark",
+  language: "en",
+} as const;
+
+// config.theme = "light"; // Error: Cannot assign to 'theme' because it is a read-only property.
